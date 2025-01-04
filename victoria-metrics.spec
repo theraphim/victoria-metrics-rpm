@@ -68,7 +68,7 @@ make BUILDINFO_TAG=%{version} victoria-metrics victoria-logs vlogscli vmagent vm
 %{__install} -d -m 0755 %{buildroot}%{_sharedstatedir}/victoria-metrics
 %{__install} -d -m 0755 %{buildroot}%{_sharedstatedir}/victoria-logs
 
-%{__install} -m 644 -T %{SOURCE301} %{buildroot}%{_sysconfdir}/sysconfig/victoria-logs
+%{__install} -p -D -m 644 %{SOURCE301} %{buildroot}%{_sysconfdir}/sysconfig/victoria-logs
 
 %files
 %{_sysusersdir}/victoria-metrics.conf
