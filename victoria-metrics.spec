@@ -1,3 +1,6 @@
+%define debug_package %{nil}
+%define __strip /bin/true
+
 %global forgeurl https://github.com/VictoriaMetrics/VictoriaMetrics
 Name:     VictoriaMetrics
 Version:  1.108.1
@@ -35,6 +38,24 @@ make BUILDINFO_TAG=%{version} victoria-metrics victoria-logs vlogscli vmagent vm
 %pre -n VictoriaLogs
 %sysusers_create_compat %{SOURCE201}
 
+%post
+%systemd_post victoria-metrics.service
+
+%preun
+%systemd_preun victoria-metrics.service
+
+%postun
+%systemd_postun_with_restart victoria-metrics.service
+
+%post -n VictoriaLogs
+%systemd_post victoria-logs.service
+
+%preun -n VictoriaLogs
+%systemd_preun victoria-logs.service
+
+%postun -n VictoriaLogs
+%systemd_postun_with_restart victoria-logs.service
+
 %install
 %{__install} -v -D -t $RPM_BUILD_ROOT%{_unitdir} %{SOURCE100}
 %{__install} -v -D -t $RPM_BUILD_ROOT%{_unitdir} %{SOURCE101}
@@ -42,6 +63,9 @@ make BUILDINFO_TAG=%{version} victoria-metrics victoria-logs vlogscli vmagent vm
 %{__install} -m 0755 -v -D -t %{buildroot}%{_bindir} bin/victoria-metrics bin/victoria-logs bin/vlogscli bin/vmagent bin/vmalert bin/vmalert-tool bin/vmauth bin/vmbackup bin/vmrestore bin/vmctl
 %{__install} -p -D -m 0644 %{SOURCE200} %{buildroot}%{_sysusersdir}/victoria-metrics.conf
 %{__install} -p -D -m 0644 %{SOURCE201} %{buildroot}%{_sysusersdir}/victoria-logs.conf
+
+%{__install} -d -m 0755 %{buildroot}%{_sharedstatedir}/victoria-metrics
+%{__install} -d -m 0755 %{buildroot}%{_sharedstatedir}/victoria-logs
 
 %files
 %{_sysusersdir}/victoria-metrics.conf
@@ -67,3 +91,4 @@ make BUILDINFO_TAG=%{version} victoria-metrics victoria-logs vlogscli vmagent vm
 %doc 
 
 %changelog
+%autochangelog
