@@ -14,6 +14,7 @@ Source100: victoria-metrics.service
 Source101: victoria-logs.service
 Source200: victoria-metrics.sysusers
 Source201: victoria-logs.sysusers
+Source301: victoria-logs.sysconfig
 BuildRequires:  systemd-rpm-macros
 %{?sysusers_requires_compat}
 
@@ -67,6 +68,8 @@ make BUILDINFO_TAG=%{version} victoria-metrics victoria-logs vlogscli vmagent vm
 %{__install} -d -m 0755 %{buildroot}%{_sharedstatedir}/victoria-metrics
 %{__install} -d -m 0755 %{buildroot}%{_sharedstatedir}/victoria-logs
 
+%{__install} -m 644 -T %{SOURCE301} %{buildroot}%{_sysconfdir}/sysconfig/victoria-logs
+
 %files
 %{_sysusersdir}/victoria-metrics.conf
 %{_unitdir}/victoria-metrics.service
@@ -86,6 +89,7 @@ make BUILDINFO_TAG=%{version} victoria-metrics victoria-logs vlogscli vmagent vm
 %{_bindir}/victoria-logs
 %{_bindir}/vlogscli
 %dir %attr(-,victoria-logs,victoria-logs) %{_sharedstatedir}/victoria-logs
+%config(noreplace) %{_sysconfdir}/sysconfig/victoria-logs
 
 %license 
 %doc 

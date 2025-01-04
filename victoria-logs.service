@@ -8,7 +8,8 @@ StartLimitBurst=5
 StartLimitInterval=0
 Restart=on-failure
 RestartSec=10
-ExecStart=/usr/bin/victoria-logs -storageDataPath=/var/lib/victoria-logs -retentionPeriod=10y -enableTCP6
+EnvironmentFile=-/etc/sysconfig/victoria-logs
+ExecStart=/usr/bin/victoria-logs -storageDataPath=/var/lib/victoria-logs -retentionPeriod=10y -enableTCP6 $VMLOGS_JOURNALD_CONFIG
 ExecStop=/bin/kill -s SIGINT $MAINPID
 LimitNOFILE=65536
 LimitNPROC=32000
