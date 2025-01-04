@@ -1,0 +1,19 @@
+[Unit]
+Description=High-performance, cost-effective and scalable logs storage
+After=network.target
+
+[Service]
+Type=simple
+StartLimitBurst=5
+StartLimitInterval=0
+Restart=on-failure
+RestartSec=10
+ExecStart=/usr/bin/victoria-logs -storageDataPath=/var/lib/victoria-logs -retentionPeriod=10y -enableTCP6
+ExecStop=/bin/kill -s SIGINT $MAINPID
+LimitNOFILE=65536
+LimitNPROC=32000
+User=victoria-logs
+Group=victoria-logs
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,2 @@
+#Type Name   ID  GECOS                        Home directory  Shell
+u   victoria-metrics -       "VictoriaMetrics"       /run/victoria-metrics    /sbin/nologin
