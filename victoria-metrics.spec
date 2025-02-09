@@ -3,7 +3,7 @@
 
 %global forgeurl https://github.com/VictoriaMetrics/VictoriaMetrics
 Name:     VictoriaMetrics
-Version:  1.108.1
+Version:  1.110.0
 %forgemeta
 Release:  %autorelease
 Summary:  High-performance, cost-effective and scalable time series database
@@ -78,7 +78,7 @@ make BUILDINFO_TAG=%{version} victoria-metrics victoria-logs vlogscli vmagent vm
 
 %files
 %config(noreplace) %{_sysconfdir}/victoria-metrics
-%config(noreplace) %{_sysconfdir}/victoria-metrics/scrape.yml
+%config(noreplace) %{_sysconfdir}/sysconfig/victoria-metrics
 %{_sysusersdir}/victoria-metrics.conf
 %{_unitdir}/victoria-metrics.service
 %{_bindir}/victoria-metrics
