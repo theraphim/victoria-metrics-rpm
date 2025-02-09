@@ -77,8 +77,8 @@ make BUILDINFO_TAG=%{version} victoria-metrics victoria-logs vlogscli vmagent vm
 %{__install} -p -D -m 0644 %{SOURCE400} %{buildroot}%{_sysconfdir}/victoria-metrics/scrape.yml
 
 %files
-%config(noreplace) %{_sysconfig}/victoria-metrics
-%config(noreplace) %{_sysconfig}/victoria-metrics/scrape.yml
+%config(noreplace) %{_sysconfdir}/victoria-metrics
+%config(noreplace) %{_sysconfdir}/victoria-metrics/scrape.yml
 %{_sysusersdir}/victoria-metrics.conf
 %{_unitdir}/victoria-metrics.service
 %{_bindir}/victoria-metrics
