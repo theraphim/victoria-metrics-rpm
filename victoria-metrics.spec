@@ -3,7 +3,7 @@
 
 %global forgeurl https://github.com/VictoriaMetrics/VictoriaMetrics
 Name:     VictoriaMetrics
-Version:  1.113.0
+Version:  1.114.0
 %forgemeta
 Release:  %autorelease
 Summary:  High-performance, cost-effective and scalable time series database
