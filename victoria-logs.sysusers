@@ -1,2 +1,0 @@
-#Type Name   ID  GECOS                        Home directory  Shell
-u   victoria-logs -       "VictoriaLogs"       /run/victoria-logs    /sbin/nologin
